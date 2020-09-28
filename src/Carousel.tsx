@@ -18,7 +18,7 @@ export interface CarouselProps {
     autoplay?: boolean;
     autoplayTimeout?: number;
     slipFactor?: number;
-    animation?: (animate: Animated.Value, toValue: number,) => Animated.CompositeAnimation;
+    animation?: (animate: Animated.Value, toValue: number, useNativeDriver: true) => Animated.CompositeAnimation;
     onPageChanged?: (index: number) => void;
     showsPageIndicator?: boolean;
     renderPageIndicator?: (config: PageIndicatorConfig) => JSX.Element;
@@ -68,7 +68,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         };
     }
 
-    public componentWillMount() {
+    public UNSAFE_componentWillMount() {
         this.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => {
                 this.startPanResponder();
@@ -203,7 +203,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         };
 
         if (animated) {
-            this.pageAnimation = this.props.animation(this.state.scrollValue, index,);
+            this.pageAnimation = this.props.animation(this.state.scrollValue, index, true);
             const animationId = this.state.scrollValue.addListener((state: { value: number }) => {
                 setIndex(state.value);
             });
