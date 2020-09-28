@@ -11,7 +11,7 @@ export default class Carousel extends React.Component {
             scrollValue: new Animated.Value(0)
         };
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => {
                 this.startPanResponder();
@@ -138,7 +138,7 @@ export default class Carousel extends React.Component {
             }
         };
         if (animated) {
-            this.pageAnimation = this.props.animation(this.state.scrollValue, index);
+            this.pageAnimation = this.props.animation(this.state.scrollValue, index, true);
             const animationId = this.state.scrollValue.addListener((state) => {
                 setIndex(state.value);
             });
