@@ -109,7 +109,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         this.gotoPage(this.props.index + (this.props.loop ? 1 : 0), false);
     }
 
-    public componentWillReceiveProps(nextProps: CarouselProps) {
+    public UNSAFE_componentWillReceiveProps(nextProps: Readonly<CarouselProps>, nextContext: any) {
         if (nextProps.autoplay) {
             this.startAutoPlay();
         } else {
@@ -155,7 +155,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         if (this.props.autoplay) {
             this.startAutoPlay();
         }
-        let newIndex = this.currentIndex;
+        let newIndex: number;
         this.panOffsetFactor = this.computePanOffset(g);
         if (this.panOffsetFactor > 0.5 || (this.panOffsetFactor > 0 && g.vx <= -0.1)) {
             newIndex = Math.floor(this.currentIndex + 1);
@@ -201,7 +201,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         };
 
         if (animated) {
-            this.pageAnimation = this.props.animation(this.state.scrollValue, index);
+            this.pageAnimation = this.props.animation(this.state.scrollValue, index, false);
             const animationId = this.state.scrollValue.addListener((state: { value: number }) => {
                 setIndex(state.value);
             });
@@ -378,7 +378,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                     alwaysBounceVertical={false}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
-                    scrollEnabled={Platform.OS === 'ios' ? true : false}
+                    scrollEnabled={Platform.OS === 'ios'}
                 >
                     {content}
                 </ScrollView>
