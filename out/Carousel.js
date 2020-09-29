@@ -309,7 +309,8 @@ const styles = StyleSheet.create({
     },
     activePageIndicatorStyle: {
         position: 'absolute',
-        backgroundColor: '#ffc81f',
+        backgroundColor: '#ffffff',
+        zIndex: 99,
     },
     pageIndicatorContainerStyle: {
         position: 'absolute',

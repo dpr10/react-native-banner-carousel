@@ -401,7 +401,8 @@ const styles = StyleSheet.create({
     } as ViewStyle,
     activePageIndicatorStyle: {
         position: 'absolute',
-        backgroundColor: '#ffc81f',
+        backgroundColor: '#ffffff',
+        zIndex: 99,
     } as ViewStyle,
     pageIndicatorContainerStyle: {
         position: 'absolute',
